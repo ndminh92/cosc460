@@ -123,7 +123,7 @@ public class TupleDesc implements Serializable {
      */
     public int fieldNameToIndex(String name) throws NoSuchElementException {
         for (int i = 0; i < this.fieldsList.length; i++) {
-        	if (this.getFieldName(i) == name) {
+        	if (this.getFieldName(i) != null && this.getFieldName(i).equals(name)) {
         		return i;
         	} 
         }
@@ -167,7 +167,7 @@ public class TupleDesc implements Serializable {
      * @return true if the object is equal to this TupleDesc.
      */
     public boolean equals(Object o) {
-        // some code goes here
+        TupleDesc otherTD = (TupleDesc) o;
         return false;
     }
 
@@ -186,7 +186,8 @@ public class TupleDesc implements Serializable {
     public String toString() {
     	String result = "";
         for (int i = 0; i < this.fieldsList.length; i++) {
-        	result = result + this.getFieldName(i) + "(" + this.getFieldType(i) + "), ";
+        	result = result + this.getFieldName(i) + 
+        			"(" + this.getFieldType(i).toString() + "), ";
         }
         return result.substring(0,-3);
     }
